@@ -26,5 +26,20 @@ namespace ClinkedIn.Data
             new User(14, "Climaco Pressman", "P@ssw0rd!", "Male", "Cheater", "Inmate", true),
             new User(15, "Gary Holifield", "P@ssw0rd!", "Male", "Tommy Gun", "Inmate", true),
         };
+
+        public List<User> GetUsers()
+        {
+            return _users;
+        }
+
+        public User AddUser(string name, string password, string gender, string nickName, string type)
+        {
+            var newUser = new User(name, password, gender, nickName, type);
+            newUser.Id = _users.Count + 1;
+            newUser.ActiveMember = true;
+            _users.Add(newUser);
+
+            return newUser;
+        }
     }
 }
