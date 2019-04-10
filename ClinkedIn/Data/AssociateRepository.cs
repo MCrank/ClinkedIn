@@ -50,6 +50,9 @@ namespace ClinkedIn.Data
             return newAssociate;
         }
 
-
+        public List<Associate> GetAssociates()
+        {
+            return _associates;
+        }
     }
 }
