@@ -1,8 +1,5 @@
 ﻿using ClinkedIn.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ClinkedIn.Data
 {
@@ -34,9 +31,11 @@ namespace ClinkedIn.Data
 
         public User AddUser(string name, string password, string gender, string nickName, string type)
         {
-            var newUser = new User(name, password, gender, nickName, type);
-            newUser.Id = _users.Count + 1;
-            newUser.ActiveMember = true;
+            var newUser = new User(name, password, gender, nickName, type)
+            {
+                Id = _users.Count + 1,
+                ActiveMember = true
+            };
             _users.Add(newUser);
 
             return newUser;

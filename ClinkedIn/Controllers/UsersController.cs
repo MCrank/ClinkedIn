@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ClinkedIn.Data;
-using Microsoft.AspNetCore.Http;
+﻿using ClinkedIn.Data;
+using ClinkedIn.Models;
+using ClinkedIn.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Controllers
@@ -14,15 +11,18 @@ namespace ClinkedIn.Controllers
     public class UsersController : ControllerBase
     {
         readonly UserRepository _userRepository;
+        readonly CreateUserRequestValidator _validator;
 
         public UsersController()
         {
             _userRepository = new UserRepository();
+            _validator = new CreateUserRequestValidator();
         }
+
         // GET: api/Users
         [HttpGet]
         [ProducesResponseType(200)]
-        public ActionResult Get()
+        public ActionResult GetAllUsers()
         {
             return Ok(_userRepository.GetUsers());
             //return new string[] { "Tom", "Jerry" };
@@ -39,9 +39,21 @@ namespace ClinkedIn.Controllers
         [HttpPost("register")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public void Post([FromBody] string value)
+        public ActionResult AddUser([FromBody]CreateUserRequest newUserRequest)
         {
+            if(_validator.UserValidate(newUserRequest))
+            {
+                return BadRequest(new { error = "All the required fields not met" });
+            }
 
+            var newUser = _userRepository.AddUser(
+                        newUserRequest.Name,
+                        newUserRequest.Password,
+                        newUserRequest.Gender,
+                        newUserRequest.NickName,
+                        newUserRequest.Type);
+
+            return Created($"api/users/{newUser.Id}", newUser);
         }
 
         // PUT: api/Users/5

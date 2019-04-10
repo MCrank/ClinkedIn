@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="SeedData\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>
