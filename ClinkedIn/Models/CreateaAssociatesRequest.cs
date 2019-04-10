@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace ClinkedIn.Models
 {
-    public class CreateaAssociates
+    public class CreateaAssociatesRequest
     {
+        public int UserId { get; set; }
+        public int AssociateId { get; set; }
+        public string ClinkType { get; set; }
     }
 }
