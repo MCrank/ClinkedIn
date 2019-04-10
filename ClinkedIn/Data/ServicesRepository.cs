@@ -32,9 +32,16 @@ namespace ClinkedIn.Data
             return _services;
         }
 
-        public Services AddService()
+        public Services AddService(string name, string description)
         {
+            var newService = new Services(name, description)
+            {
+                ServiceId = _services.Count + 1,
 
+            };
+            _services.Add(newService);
+            return newService;
+            
         }
 
     }

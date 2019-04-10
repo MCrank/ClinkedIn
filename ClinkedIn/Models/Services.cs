@@ -23,7 +23,7 @@ namespace ClinkedIn.Models
         }
 
         // Jungle Overloading because the method name is the same, but the parameters are different  
-        // Not for seed data
+        // Not for seed data, this is for when are hypothectical user adds a service
         public Services(string name, string description)
         {
             // ServiceId = serviceid;
