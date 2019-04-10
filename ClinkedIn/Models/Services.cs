@@ -13,13 +13,23 @@ namespace ClinkedIn.Models
         public string Description { get; set; }
         public int UserId { get; set; }
 
-        // Constructor Method for when we create a new instance 
+        // Constructor Method for when we create a new instance - only for seed data
         public Services(int serviceid, string name, string description, int userid)
         {
             ServiceId = serviceid;
             Name = name;
             Description = description;
             UserId = userid;
+        }
+
+        // Jungle Overloading because the method name is the same, but the parameters are different  
+        // Not for seed data
+        public Services(string name, string description)
+        {
+            // ServiceId = serviceid;
+            Name = name;
+            Description = description;
+            // UserId = userid;
         }
     }
 }
