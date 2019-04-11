@@ -1,8 +1,6 @@
 ﻿using ClinkedIn.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ClinkedIn.Data
 {
@@ -12,7 +10,7 @@ namespace ClinkedIn.Data
         {
             new Interest(1, "Weightlifting", 1),
             new Interest(2, "Escape Planning", 2),
-            new Interest(3, "Amature Tattooing", 3),
+            new Interest(3, "Amateur Tattooing", 3),
             new Interest(4, "Litter Removal", 4),
             new Interest(5, "Cell Block Decor", 4),
             new Interest(5, "Cell Block Decor", 1),
@@ -37,6 +35,11 @@ namespace ClinkedIn.Data
         {
             return _interests;
         }
+
+        //public List<Interest> GetInterestsByUserId(int id)
+        //{
+        //    return _interests
+        //}
 
         public Interest AddInterest(string name, int userId)
         {
