@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ClinkedIn.Data;
+using ClinkedIn.Validators;
+using ClinkedIn.Models;
 
 namespace ClinkedIn.Controllers
 {
@@ -11,15 +14,26 @@ namespace ClinkedIn.Controllers
     [ApiController]
     public class ServicesController : ControllerBase
     {
+        readonly ServicesRepository _servicesRepository;
+        readonly CreateServicesValidator _createServicesValidator;
+
+        public ServicesController()
+        {
+            _servicesRepository = new ServicesRepository();
+            _createServicesValidator = new CreateServicesValidator();
+        }
+
+
         // GET: api/Services
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult GetServices()
         {
-            return new string[] { "value1", "value2" };
+            // return new string[] { "value1", "value2" };
+            return Ok(_servicesRepository.GetAllServices());
         }
 
         // GET: api/Services/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetServicebyID")]
         public string Get(int id)
         {
             return "value";
