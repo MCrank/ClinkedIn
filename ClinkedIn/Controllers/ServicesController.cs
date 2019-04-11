@@ -34,9 +34,10 @@ namespace ClinkedIn.Controllers
 
         // GET: api/Services/5
         [HttpGet("{id}", Name = "GetServicebyID")]
-        public string Get(int id)
+        public IActionResult GetServicesByID(int id)
         {
-            return "value";
+            // return "value";
+            return Ok(_servicesRepository.GetServiceById(id));
         }
 
         // POST: api/Services

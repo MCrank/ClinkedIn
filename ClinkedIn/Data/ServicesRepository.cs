@@ -32,6 +32,12 @@ namespace ClinkedIn.Data
             return _services;
         }
 
+        public List<Services> GetServiceById(int id)
+        {
+            return _services.FindAll(service => service.UserId == id);
+
+        }
+
         public Services AddService(string name, string description)
         {
             var newService = new Services(name, description)
