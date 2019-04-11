@@ -32,7 +32,7 @@ namespace ClinkedIn.Data
             return _services;
         }
 
-        public List<Services> GetServiceById(int id)
+        public List<Services> GetInmatesServices(int id)
         {
             return _services.FindAll(service => service.UserId == id);
 
