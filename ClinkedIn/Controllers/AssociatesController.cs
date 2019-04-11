@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using ClinkedIn.Data;
 using Microsoft.AspNetCore.Mvc;
+using ClinkedIn.Models;
 
 namespace ClinkedIn.Controllers
 {
@@ -11,6 +9,13 @@ namespace ClinkedIn.Controllers
     [ApiController]
     public class AssociatesController : ControllerBase
     {
+        readonly AssociateRepository _associateRepository;
+
+        public AssociatesController()
+        {
+            _associateRepository = new AssociateRepository();
+        }
+
         // GET: api/Associates
         [HttpGet]
         public IEnumerable<string> Get()
@@ -19,7 +24,7 @@ namespace ClinkedIn.Controllers
         }
 
         // GET: api/Associates/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetAssociatesById")]
         public string Get(int id)
         {
             return "value";
@@ -27,8 +32,10 @@ namespace ClinkedIn.Controllers
 
         // POST: api/Associates
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult AddAssociate([FromBody]CreateaAssociatesRequest request)
         {
+            var newAssociate = _associateRepository.AddAssociate(request.UserId, request.AssociateId, request.ClinkType);
+            return Created($"api/associates/{newAssociate.Id}", newAssociate);
         }
 
         // PUT: api/Associates/5
