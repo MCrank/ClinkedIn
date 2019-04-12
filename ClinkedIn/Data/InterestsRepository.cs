@@ -36,10 +36,12 @@ namespace ClinkedIn.Data
             return _interests;
         }
 
-        //public List<Interest> GetInterestsByUserId(int id)
-        //{
-        //    return _interests
-        //}
+
+        public Interest GetInterestsByUserId(int interestId)
+        {
+            var selectedInterests = _interests.Find(Interest => Interest.UserId == interestId);
+            return selectedInterests;
+        }
 
         public Interest AddInterest(string name, int userId)
         {

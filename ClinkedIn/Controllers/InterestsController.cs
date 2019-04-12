@@ -28,9 +28,12 @@ namespace ClinkedIn.Controllers
 
         // GET: api/Interests/5
         [HttpGet("{id}", Name = "GetInterestsById")]
-        public string Get(int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public ActionResult<Interest> GetInterestsByUserId(int userId)
         {
-            return "value";
+            return Ok(_interestsRepository.GetInterestsByUserId(userId));
         }
 
         // POST: api/Interests
