@@ -1,5 +1,6 @@
 ﻿using ClinkedIn.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ClinkedIn.Data
 {
@@ -24,9 +25,15 @@ namespace ClinkedIn.Data
             new User(15, "Gary Holifield", "P@ssw0rd!", "Male", "Tommy Gun", "Inmate", true),
         };
 
-        public List<User> GetUsers()
+        public List<User> GetAllUsers()
         {
             return _users;
+        }
+
+        public User GetUserById(int userId)
+        {
+            var selectedUser = _users.Find(user => user.Id == userId);
+            return selectedUser;
         }
 
         public User AddUser(string name, string password, string gender, string nickName, string type)
