@@ -23,10 +23,15 @@ namespace ClinkedIn.Controllers
         [HttpGet]
         public ActionResult GetAllAssociates()
         {
-            var associatesWithNames = from a in _associateRepository.GetAssociates()
+            var usersWithNames = from a in _associateRepository.GetAssociates()
                                       join u in _userRepository.GetAllUsers() on a.UserId equals u.Id
-                                      select new { a.UserId, u.NickName };
+                                      select new { u.NickName, a.AssociateId, a.ClinkType };
 
+            var associatesWithNames = from x in usersWithNames
+                                      join y in _userRepository.GetAllUsers() on x.AssociateId equals y.Id
+                                      select new { UserName = x.NickName, AssociateName = y.NickName, x.ClinkType };
+            
+            
             return Ok(associatesWithNames);
         }
 
