@@ -55,8 +55,6 @@ namespace ClinkedIn.Controllers
             return Ok(result);
         }
 
-
-
         // POST: api/Interests
         [HttpPost("register")]
         [ProducesResponseType(201)]

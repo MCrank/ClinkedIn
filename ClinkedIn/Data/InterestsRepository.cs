@@ -35,7 +35,7 @@ namespace ClinkedIn.Data
         {
             return _interests;
         }
-
+                                                                                                                                
 
        public Interest GetInterestsByUserId(int interestId)
         {
@@ -47,6 +47,13 @@ namespace ClinkedIn.Data
         {
             var selectedUsers = _interests.FindAll(Interest => Interest.Name == name);
             return selectedUsers;
+        }
+
+        public List<Interest> DeleteInterest(int Interestid)
+        {
+            var interestToDelete = _interests.Find(x => x.InterestId == Interestid);
+            _interests.Remove(interestToDelete);
+            return _interests;
         }
 
 
