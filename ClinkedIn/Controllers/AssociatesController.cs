@@ -10,29 +10,31 @@ namespace ClinkedIn.Controllers
     public class AssociatesController : ControllerBase
     {
         readonly AssociateRepository _associateRepository;
+        readonly UserRepository _userRepository;
 
         public AssociatesController()
         {
             _associateRepository = new AssociateRepository();
+            _userRepository = new UserRepository();
         }
 
         // GET: api/Associates
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult GetAllAssociates()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_associateRepository.GetAssociates());
         }
 
         // GET: api/Associates/5
         [HttpGet("{id}", Name = "GetAssociatesById")]
-        public string Get(int id)
+        public ActionResult GetAssociatesById(int id)
         {
-            return "value";
+            return Ok(_associateRepository.GetAssociatesById(id));
         }
 
         // POST: api/Associates
         [HttpPost]
-        public ActionResult AddAssociate([FromBody]CreateaAssociatesRequest request)
+        public ActionResult AddAssociate([FromBody]CreateAssociatesRequest request)
         {
             var newAssociate = _associateRepository.AddAssociate(request.UserId, request.AssociateId, request.ClinkType);
             return Created($"api/associates/{newAssociate.Id}", newAssociate);

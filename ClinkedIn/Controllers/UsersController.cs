@@ -24,15 +24,18 @@ namespace ClinkedIn.Controllers
         [ProducesResponseType(200)]
         public ActionResult GetAllUsers()
         {
-            return Ok(_userRepository.GetUsers());
+            return Ok(_userRepository.GetAllUsers());
             //return new string[] { "Tom", "Jerry" };
         }
 
         // GET: api/Users/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public ActionResult<User> GetUserById(int id)
         {
-            return "value";
+            return Ok(_userRepository.GetUserById(id));
         }
 
         // POST: api/Users

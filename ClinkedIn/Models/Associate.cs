@@ -22,9 +22,21 @@ namespace ClinkedIn.Models
             ClinkType = clinkType;
         }
 
+        /*
+        public Associate(int id, string userName, string associateName, string clinkType)
+        {
+            Id = id;
+            userName = UserName;
+            associateName = AssociateName;
+            ClinkType = clinkType;
+        }
+        */
+
         public int Id { get; set; }
         public int UserId { get; set; }
         public int AssociateId { get; set; }
         public string ClinkType { get; set; }
+        //public string UserName { get; set; }
+        //public string AssociateName { get; set; }
     }
 }
