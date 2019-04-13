@@ -2,6 +2,7 @@
 using ClinkedIn.Data;
 using ClinkedIn.Models;
 using ClinkedIn.Validators;
+using System.Linq;
 
 namespace ClinkedIn.Controllers
 {
@@ -29,14 +30,14 @@ namespace ClinkedIn.Controllers
         }
 
         // GET: api/Interests/5
-      //  [HttpGet("{id}", Name = "GetInterestsById")]
-      //  [ProducesResponseType(200)]
-      //  [ProducesResponseType(204)]
-      //  [ProducesResponseType(400)]
-      //  public ActionResult<Interest> GetInterestsByUserId(int id)
-      //  {
-      //      return Ok(_interestsRepository.GetInterestsByUserId(id));
-      //  }
+        [HttpGet("yomama/{id}", Name = "GetInterestsById")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public ActionResult<Interest> GetInterestsByUserId(int id)
+        {
+            return Ok(_interestsRepository.GetInterestsByUserId(id));
+        }
 
         // GET: api/Interest/Litter Removal
         [HttpGet("{interest}", Name = "GetUsersByInterest")]
@@ -45,8 +46,13 @@ namespace ClinkedIn.Controllers
         [ProducesResponseType(400)]
         public ActionResult<Interest> GetUsersByInterest(string interest)
         {
-           // var allUsers = _usersRepository.
-            return Ok(_interestsRepository.GetUsersByInterest(interest));
+            var users = _usersRepository.GetAllUsers();
+            var userIdInterests =(_interestsRepository.GetUsersByInterest(interest));
+            var result = users.Join(userIdInterests, 
+                user => user.Id, 
+                interestId => interestId.UserId, 
+                (user, interestId) => new { Name = user.NickName });
+            return Ok(result);
         }
 
 

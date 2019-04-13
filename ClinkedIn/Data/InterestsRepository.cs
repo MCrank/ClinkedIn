@@ -43,11 +43,9 @@ namespace ClinkedIn.Data
             return selectedInterests;
         }
 
-        public List<int> GetUsersByInterest(string name)
+        public List<Interest> GetUsersByInterest(string name)
         {
-            var selectedUsers = _interests.FindAll(Interest => Interest.Name == name)
-                                            .Select(user => user.UserId)
-                                            .ToList();
+            var selectedUsers = _interests.FindAll(Interest => Interest.Name == name);
             return selectedUsers;
         }
 
