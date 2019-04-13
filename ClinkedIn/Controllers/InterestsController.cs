@@ -10,11 +10,13 @@ namespace ClinkedIn.Controllers
     public class InterestsController : ControllerBase
     {
         readonly InterestsRepository _interestsRepository;
+        readonly UserRepository _usersRepository;
         readonly CreateInterestRequestValidator _validator;
 
         public InterestsController()
         {
             _interestsRepository = new InterestsRepository();
+            _usersRepository = new UserRepository();
             _validator = new CreateInterestRequestValidator();
         }
 
@@ -27,14 +29,27 @@ namespace ClinkedIn.Controllers
         }
 
         // GET: api/Interests/5
-        [HttpGet("{id}", Name = "GetInterestsById")]
+      //  [HttpGet("{id}", Name = "GetInterestsById")]
+      //  [ProducesResponseType(200)]
+      //  [ProducesResponseType(204)]
+      //  [ProducesResponseType(400)]
+      //  public ActionResult<Interest> GetInterestsByUserId(int id)
+      //  {
+      //      return Ok(_interestsRepository.GetInterestsByUserId(id));
+      //  }
+
+        // GET: api/Interest/Litter Removal
+        [HttpGet("{interest}", Name = "GetUsersByInterest")]
         [ProducesResponseType(200)]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public ActionResult<Interest> GetInterestsByUserId(int userId)
+        public ActionResult<Interest> GetUsersByInterest(string interest)
         {
-            return Ok(_interestsRepository.GetInterestsByUserId(userId));
+           // var allUsers = _usersRepository.
+            return Ok(_interestsRepository.GetUsersByInterest(interest));
         }
+
+
 
         // POST: api/Interests
         [HttpPost("register")]
