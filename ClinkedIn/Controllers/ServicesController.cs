@@ -16,12 +16,14 @@ namespace ClinkedIn.Controllers
     {
         readonly ServicesRepository _servicesRepository;
         readonly CreateServicesValidator _createServicesValidator;
+        // Getting access to Marco's repository
         readonly UserRepository _userRepository;
 
         public ServicesController()
         {
             _servicesRepository = new ServicesRepository();
             _createServicesValidator = new CreateServicesValidator();
+            // Making a copy of Marco's repository 
             _userRepository = new UserRepository();
         }
 
@@ -55,9 +57,11 @@ namespace ClinkedIn.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete/{serviceId}")]
+        public ActionResult DeleteAService(int serviceId)
         {
+            return Ok(_servicesRepository.DeleteService(serviceId));
         }
+        
     }
 }

@@ -39,10 +39,12 @@ namespace ClinkedIn.Data
 
         }
 
-        // public Services DeleteService(int id, Services service)
-        // {
-           // var specificInmate = 
-        // }
+        public List<Services> DeleteService(int serviceid)
+        {
+            var serviceToDelete = _services.Find(x => x.ServiceId == serviceid);
+            _services.Remove(serviceToDelete);
+            return _services;
+        }
 
         public Services AddService(string name, string description, double price)
         {
