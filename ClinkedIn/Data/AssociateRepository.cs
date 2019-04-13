@@ -1,5 +1,6 @@
 ﻿using ClinkedIn.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ClinkedIn.Data
 {

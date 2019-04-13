@@ -2,6 +2,7 @@
 using ClinkedIn.Data;
 using Microsoft.AspNetCore.Mvc;
 using ClinkedIn.Models;
+using System.Linq;
 
 namespace ClinkedIn.Controllers
 {
@@ -22,8 +23,21 @@ namespace ClinkedIn.Controllers
         [HttpGet]
         public ActionResult GetAllAssociates()
         {
+            var associatesWithNames = from a in _associateRepository.GetAssociates()
+                                      join u in _userRepository.GetAllUsers() on a.UserId equals u.Id
+                                      select new { a.UserId, u.NickName };
+
+            return Ok(associatesWithNames);
+        }
+
+        /*
+        // GET: api/Associates
+        [HttpGet]
+        public ActionResult GetAllAssociates()
+        {
             return Ok(_associateRepository.GetAssociates());
         }
+        */
 
         // GET: api/Associates/5
         [HttpGet("{id}", Name = "GetAssociatesById")]
