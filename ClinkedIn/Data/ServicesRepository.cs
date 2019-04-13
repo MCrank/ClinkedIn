@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClinkedIn.Models;
+using ClinkedIn.Data;
 
 namespace ClinkedIn.Data
 {
@@ -37,6 +38,11 @@ namespace ClinkedIn.Data
             return _services.FindAll(service => service.UserId == id);
 
         }
+
+        // public Services DeleteService(int id, Services service)
+        // {
+           // var specificInmate = 
+        // }
 
         public Services AddService(string name, string description, double price)
         {

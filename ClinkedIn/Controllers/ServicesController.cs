@@ -16,11 +16,13 @@ namespace ClinkedIn.Controllers
     {
         readonly ServicesRepository _servicesRepository;
         readonly CreateServicesValidator _createServicesValidator;
+        readonly UserRepository _userRepository;
 
         public ServicesController()
         {
             _servicesRepository = new ServicesRepository();
             _createServicesValidator = new CreateServicesValidator();
+            _userRepository = new UserRepository();
         }
 
 
