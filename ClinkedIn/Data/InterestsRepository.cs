@@ -49,12 +49,12 @@ namespace ClinkedIn.Data
             return selectedUsers;
         }
 
-        public List<Interest> DeleteInterest(int Interestid)
-        {
-            var interestToDelete = _interests.Find(x => x.InterestId == Interestid);
-            _interests.Remove(interestToDelete);
-            return _interests;
-        }
+        //public List<Interest> DeleteInterest(int Interestid)
+        //{
+          //  var interestToDelete = _interests.Find(x => x.InterestId == Interestid);
+           // _interests.Remove(interestToDelete);
+            //return _interests;
+       // }
 
 
 

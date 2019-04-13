@@ -52,7 +52,15 @@ namespace ClinkedIn.Controllers
                 user => user.Id, 
                 interestId => interestId.UserId, 
                 (user, interestId) => new { Name = user.NickName });
-            return Ok(result);
+            if (result.Count()< 1 ) 
+            {
+                return NotFound($"Sorry Bruh, We Can't Find That {interest} ");                
+            }
+            else
+            {
+                return Ok(result);
+            }
+            
         }
 
         // POST: api/Interests
