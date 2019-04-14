@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ClinkedIn.Models
 {
@@ -20,7 +16,7 @@ namespace ClinkedIn.Models
             Type = type;
         }
 
-        public User(int id, string name, string password, string gender, string nickName, string type, DateTime startSentence, DateTime endSentence, bool active)
+        public User(int id, string name, string password, string gender, string nickName, string type, DateTime? startSentence, DateTime? endSentence, bool active)
         {
             Id = id;
             Name = name;
@@ -28,8 +24,8 @@ namespace ClinkedIn.Models
             Gender = gender;
             NickName = nickName;
             Type = type;
-            StartSentence = startSentence;
-            EndSentence = endSentence;
+            StartSentence = startSentence??default;
+            EndSentence = endSentence??default;
             ActiveMember = active;
         }
 
@@ -46,7 +42,7 @@ namespace ClinkedIn.Models
         {
             get
             {
-                return (EndSentence - StartSentence).Days;
+                return Convert.ToInt32(Math.Round((EndSentence - StartSentence).TotalDays));
             }
         }
 

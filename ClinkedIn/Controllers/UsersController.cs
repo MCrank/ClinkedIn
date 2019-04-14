@@ -25,17 +25,25 @@ namespace ClinkedIn.Controllers
         public ActionResult GetAllUsers()
         {
             return Ok(_userRepository.GetAllUsers());
-            //return new string[] { "Tom", "Jerry" };
         }
 
         // GET: api/Users/5
         [HttpGet("{id}", Name = "Get")]
         [ProducesResponseType(200)]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
         [ProducesResponseType(400)]
         public ActionResult<User> GetUserById(int id)
         {
             return Ok(_userRepository.GetUserById(id));
+        }
+        // GET: api/Users/5
+        [HttpGet("remaining/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public ActionResult<User> GetUserDaysRemaining(int id)
+        {
+            return Ok(_userRepository.GetUserDaysRemaining(id));
         }
 
         // POST: api/Users
@@ -54,6 +62,8 @@ namespace ClinkedIn.Controllers
                         newUserRequest.Password,
                         newUserRequest.Gender,
                         newUserRequest.NickName,
+                        newUserRequest.StartSentence,
+                        newUserRequest.EndSentence,
                         newUserRequest.Type);
 
             return Created($"api/users/{newUser.Id}", newUser);
