@@ -61,8 +61,7 @@ namespace ClinkedIn.Controllers
         [HttpDelete("delete/{serviceId}")]
         public ActionResult DeleteAService(int serviceId)
         {
-            return Ok(_servicesRepository.DeleteService(serviceId));
+                return Ok(_servicesRepository.DeleteService(serviceId));
+            }
         }
-        
     }
-}
