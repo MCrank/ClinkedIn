@@ -86,11 +86,11 @@ namespace ClinkedIn.Controllers
 
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE: api/ApiWithActions/4
+        [HttpDelete("delete/{interestId}")]
+        public ActionResult DeleteAnInterest(int interestId)
         {
-
+            return Ok(_interestsRepository.DeleteInterest(interestId));
         }
     }
 }
