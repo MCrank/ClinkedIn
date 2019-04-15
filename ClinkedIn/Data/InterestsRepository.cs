@@ -6,6 +6,7 @@ namespace ClinkedIn.Data
 {
     public class InterestsRepository
     {
+        // Your Data list of Interests //
         static List<Interest> _interests = new List<Interest>
         {
             new Interest(1, "Weightlifting", 1),
@@ -31,24 +32,27 @@ namespace ClinkedIn.Data
 
         };
 
+        // Call to retrieve all interests //
         public List<Interest> GetAllInterests()
         {
             return _interests;
         }
-                                                                                                                                
 
-       public Interest GetInterestsByUserId(int interestId)
+        // Call to retrieve all interests by User ID //
+        public Interest GetInterestsByUserId(int interestId)
         {
             var selectedInterests = _interests.Find(Interest => Interest.UserId == interestId);
             return selectedInterests;
         }
 
+        // Call to retrieve all users by Interest ID //
         public List<Interest> GetUsersByInterest(string name)
         {
             var selectedUsers = _interests.FindAll(Interest => Interest.Name.ToLower() == name.ToLower());
             return selectedUsers;
         }
 
+        // Call to delete your interest by interest ID //
         public List<Interest> DeleteInterest(int Interestid)
         {
             if (_interests.Exists(x => x.InterestId == Interestid))
@@ -64,6 +68,7 @@ namespace ClinkedIn.Data
             }
         }
 
+        // Call to add an interest to your existing list //
         public Interest AddInterest(string name, int interestId)
         {
             var newInterest = new Interest(name, interestId)
