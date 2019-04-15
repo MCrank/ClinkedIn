@@ -36,7 +36,14 @@ namespace ClinkedIn.Data
 
         public List<Services> GetInmatesServices(int id)
         {
-            return _services.FindAll(service => service.UserId == id);
+            if (_services.Exists(x => x.UserId == id))
+            {
+                return _services.FindAll(service => service.UserId == id);
+            } else
+            {
+                return null;
+            }
+            
 
         }
 

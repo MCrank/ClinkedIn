@@ -45,7 +45,7 @@ namespace ClinkedIn.Controllers
         }
 
         // POST: api/Services
-        [HttpPost("addservice")]
+        [HttpPost]
         // public void Post([FromBody] string value)
         public ActionResult AddService([FromBody]CreateService createService)
         {
@@ -67,7 +67,7 @@ namespace ClinkedIn.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("delete/{serviceId}")]
+        [HttpDelete("{serviceId}")]
         public ActionResult DeleteAService(int serviceId)
         {
                 return Ok(_servicesRepository.DeleteService(serviceId));
