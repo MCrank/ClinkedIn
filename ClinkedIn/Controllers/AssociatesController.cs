@@ -31,24 +31,53 @@ namespace ClinkedIn.Controllers
                                       join y in _userRepository.GetAllUsers() on x.AssociateId equals y.Id
                                       select new { UserName = x.NickName, AssociateName = y.NickName, x.ClinkType };
             
-            
             return Ok(associatesWithNames);
         }
 
-        /*
-        // GET: api/Associates
-        [HttpGet]
-        public ActionResult GetAllAssociates()
+        // GET: api/Associates/5/friends
+        [HttpGet("{id}/friends", Name = "GetFriendsById")]
+        public ActionResult GetFriendsById(int id)
         {
-            return Ok(_associateRepository.GetAssociates());
+            var usersWithNames = from a in _associateRepository.GetFriendsById(id)
+                                 join u in _userRepository.GetAllUsers() on a.UserId equals u.Id
+                                 select new { u.NickName, a.AssociateId, a.ClinkType };
+
+            var friendsWithNames = from x in usersWithNames
+                                      join y in _userRepository.GetAllUsers() on x.AssociateId equals y.Id
+                                      select new { UserName = x.NickName, AssociateName = y.NickName, x.ClinkType };
+
+            return Ok(friendsWithNames);
         }
-        */
+
+        // GET: api/Associates/5/enemies
+        [HttpGet("{id}/enemies", Name = "GetEnemiesById")]
+        public ActionResult GetEnemiesById(int id)
+        {
+            var usersWithNames = from a in _associateRepository.GetEnemiesById(id)
+                                 join u in _userRepository.GetAllUsers() on a.UserId equals u.Id
+                                 select new { u.NickName, a.AssociateId, a.ClinkType };
+
+            var enemiessWithNames = from x in usersWithNames
+                                   join y in _userRepository.GetAllUsers() on x.AssociateId equals y.Id
+                                   select new { UserName = x.NickName, AssociateName = y.NickName, x.ClinkType };
+
+            return Ok(enemiessWithNames);
+        }
+
 
         // GET: api/Associates/5
         [HttpGet("{id}", Name = "GetAssociatesById")]
         public ActionResult GetAssociatesById(int id)
         {
-            return Ok(_associateRepository.GetAssociatesById(id));
+            var usersWithNames = from a in _associateRepository.GetAssociatesById(id)
+                                 join u in _userRepository.GetAllUsers() on a.UserId equals u.Id
+                                 select new { u.NickName, a.AssociateId, a.ClinkType };
+
+            var associatesWithNames = from x in usersWithNames
+                                      join y in _userRepository.GetAllUsers() on x.AssociateId equals y.Id
+                                      select new { UserName = x.NickName, AssociateName = y.NickName, x.ClinkType };
+
+            return Ok(associatesWithNames);
         }
 
         // POST: api/Associates
@@ -57,18 +86,6 @@ namespace ClinkedIn.Controllers
         {
             var newAssociate = _associateRepository.AddAssociate(request.UserId, request.AssociateId, request.ClinkType);
             return Created($"api/associates/{newAssociate.Id}", newAssociate);
-        }
-
-        // PUT: api/Associates/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

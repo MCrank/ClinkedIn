@@ -57,5 +57,15 @@ namespace ClinkedIn.Data
         {
             return _associates.FindAll(x => x.UserId == id);
         }
+
+        public List<Associate> GetFriendsById(int id)
+        {
+            return _associates.FindAll(x => x.UserId == id).FindAll(y => y.ClinkType == "Friend");
+        }
+
+        public List<Associate> GetEnemiesById(int id)
+        {
+            return _associates.FindAll(x => x.UserId == id).FindAll(y => y.ClinkType == "Enemy");
+        }
     }
 }
