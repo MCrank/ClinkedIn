@@ -11,7 +11,8 @@ namespace ClinkedIn.Validators
         public bool ServiesValidator(CreateService createService)
         {
             return string.IsNullOrEmpty(createService.Name)
-                || string.IsNullOrEmpty(createService.Description);
+                || string.IsNullOrEmpty(createService.Description)
+                || double.IsNaN(createService.Price);
         }
     }
 }
