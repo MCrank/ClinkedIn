@@ -45,9 +45,18 @@ namespace ClinkedIn.Controllers
         }
 
         // POST: api/Services
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("addservice")]
+        // public void Post([FromBody] string value)
+        public ActionResult AddService([FromBody]CreateService createService)
         {
+            if(_createServicesValidator.ServiesValidator(createService))
+            {
+                return BadRequest(new { error = "all of the required information isn't available" });
+            }
+
+            var newService = _servicesRepository.AddService(createService.Name, createService.Description, createService.Price);
+
+            return Created($"api/Services/{newService.ServiceId}", newService);
         }
 
         // PUT: api/Services/5
