@@ -29,8 +29,8 @@ namespace ClinkedIn.Controllers
             return Ok(_interestsRepository.GetAllInterests());
         }
 
-        // GET: api/Interests/5
-        [HttpGet("yomama/{id}", Name = "GetInterestsById")]
+        // GET: api/Interests/user/5
+        [HttpGet("user/{id}", Name = "GetInterestsById")]
         [ProducesResponseType(200)]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -47,7 +47,7 @@ namespace ClinkedIn.Controllers
         public ActionResult<Interest> GetUsersByInterest(string interest)
         {
             var users = _usersRepository.GetAllUsers();
-            var userIdInterests =(_interestsRepository.GetUsersByInterest(interest));
+            var userIdInterests =(_interestsRepository.GetUsersByInterest(interest.ToLower()));
             var result = users.Join(userIdInterests, 
                 user => user.Id, 
                 interestId => interestId.UserId, 
